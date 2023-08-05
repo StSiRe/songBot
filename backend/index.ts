@@ -4,7 +4,7 @@ const app = express()
 
 app.get('/', (req,res)=>{
 
-    res.send('<h1>HELLO WORLD</h1> <div>You is faggot </div>')
+    res.send('<h1>HELLO WORLD</h1> <div>Вениамин Шалунов долбаеб </div>')
 })
 
 app.listen(8080, ()=>{
