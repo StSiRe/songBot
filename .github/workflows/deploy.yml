@@ -26,6 +26,6 @@ jobs:
       - name: connect and pull
         run: ssh -p 49168 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd songBot && git checkout master && git pull"
       - name: connect and rebuild services
-        run: ssh -p 49168 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "export TG_TOKEN=${{ secrets.TG_TOKEN }}  && docker compose --compatibility -p prod -f docker-compose.yml up -d --force-recreate --build  && exit"
+        run: ssh -p 49168 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd songBot && export TG_TOKEN=${{ secrets.TG_TOKEN }}  && docker compose --compatibility -p prod -f docker-compose.yml up -d --force-recreate --build  && exit"
       - name: cleanup
         run: rm -rf ~/.ssh
