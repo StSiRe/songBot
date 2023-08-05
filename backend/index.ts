@@ -1,13 +1,10 @@
-const express = require('express')
+import { Bot } from 'grammy'
 
-const app = express()
+// 1. Create a bot
+const bot = new Bot(process.env.TG_TOKEN as string)
 
-app.get('/', (req,res)=>{
-    res.send("ddd")
-})
+// 2. Reply to text messages with the received text
+bot.on('message:text', ctx => ctx.reply(ctx.message.text))
 
-app.listen(8080, ()=>{
-    console.log('server started')
-})
-
-console.log(process.env.TG_TOKEN);
+// 3. Start the bot
+bot.start()
