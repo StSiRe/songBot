@@ -11,7 +11,7 @@ services:
     environment:
       - TG_TOKEN
     ports:
-      - 8000:8080
+      - 80:8080
 
   db:
     image: mysql:8.1
