@@ -3,8 +3,8 @@ const express = require('express')
 const app = express()
 
 app.get('/', (req,res)=>{
-    res.send('<h1>HELLO WORLD</h1>')
-    res.send('You is faggot')
+
+    res.send('<h1>HELLO WORLD</h1> <div>You is faggot </div>')
 })
 
 app.listen(8080, ()=>{
