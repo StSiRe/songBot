@@ -62,11 +62,11 @@ bot.callbackQuery("click-button-search", async (ctx) => {
     const list = songs.getListNamesSongs();
     console.log(list);
     let text: string;
-    for(let i =0; i < list.length - 1; i++){
+    for(let i =0; i < list.length; i++){
         text+= (list[i]+"\n");
     }
     console.log(text);
-    //await bot.api.sendMessage(id, text);
+    await bot.api.sendMessage(id, text);
 
     await bot.api.sendMessage(id, "Можешь пролистывать его при помощи кнопок снизу");
 });
