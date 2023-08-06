@@ -1,4 +1,5 @@
 import { Bot } from 'grammy'
+//import {json} from "express";
 
 // 1. Create a bot
 const bot = new Bot(process.env.TG_TOKEN as string)
@@ -10,9 +11,12 @@ bot.on("message", async (ctx) => {
     // `txt` will be a `string` when processing text messages.
     // It will be `undefined` if the received message does not have any message text,
     // e.g. photos, stickers, and other messages.
-    const txt = ctx.from.id + " " + ctx.from.first_name + " " + ctx.from.username;
+    const txt = ctx.from;
 
-    await ctx.reply(txt);
+    const text = JSON.stringify(txt);
+
+
+    await ctx.reply(text);
 });
 
 
