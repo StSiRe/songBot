@@ -87,10 +87,22 @@ bot.command("add", async(ctx) => {
     userAddingID.push(id);
     await ctx.reply("Введите название песни:");
 });
+
+function contains(data:number[], value:number)
+{
+    for (let i=0; i < data.length; i++)
+    {
+        if(data[i] == value)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 bot.on("message", async (ctx) => {
 
     const id = ctx.chat.id;
-    if(userAddingID.includes(id))
+    if(contains(userAddingID, id))
     {
         console.log("Now we in ass");
         console.log(JSON.stringify(ctx));
