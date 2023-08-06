@@ -58,7 +58,7 @@ bot.callbackQuery("click-button-search", async (ctx) => {
     await bot.api.sendMessage(id, "Вот список песен:");
     const list = songs.getListNamesSongs();
     let text: string;
-    for(let item of list)
+    for(let item in list)
     {
         text+= (item+"\n");
     }
