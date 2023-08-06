@@ -12,7 +12,7 @@ class Songs {
         let names: string[];
         for(let i=0; i < this.list.length; i++)
         {
-            console.log(this.list[i]);
+            console.log(this.list[i][0]);
         }
         return names;
     }
