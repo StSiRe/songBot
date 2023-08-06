@@ -12,7 +12,7 @@ class Songs {
         let names: string[];
         for(let i=0; i < this.list.length - 1; i++)
         {
-            names.push(this.list[i][0]));
+            names.push(this.list[i][0]);
         }
         return names;
     }
