@@ -9,30 +9,30 @@ class Songs {
         ["Слава Андрею!", "Андрею \n слава", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
     ];
     getListNamesSongs() {
-        let names: string[];
-        for(let i=0; i < this.list.length - 1; i++)
-        {
-            names.push(this.list[i][0]);
-        }
+        let names: string[] = ["AAAA", "BBBB", "CCCC"];
+        // for(let i=0; i < this.list.length - 1; i++)
+        // {
+        //     names.push(this.list[i][0]);
+        // }
         console.log(names);
         return names;
     }
 
-    getTextOfSong(id: number) {
-        let texts: string[];
-        for (let item in this.list) {
-            texts.push(item[1]);
-        }
-        return texts;
-    }
-
-    getVideoLinkOfSong(id: number) {
-        let links: string[];
-        for (let item in this.list) {
-            links.push(item[2]);
-        }
-        return links;
-    }
+    // getTextOfSong(id: number) {
+    //     let texts: string[];
+    //     for (let item in this.list) {
+    //         texts.push(item[1]);
+    //     }
+    //     return texts;
+    // }
+    //
+    // getVideoLinkOfSong(id: number) {
+    //     let links: string[];
+    //     for (let item in this.list) {
+    //         links.push(item[2]);
+    //     }
+    //     return links;
+    // }
 }
 
 
