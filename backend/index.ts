@@ -11,7 +11,10 @@ bot.on("message", async (ctx) => {
     // It will be `undefined` if the received message does not have any message text,
     // e.g. photos, stickers, and other messages.
     const txt = ctx.message.text;
+
+    await ctx.reply(txt);
 });
+
 //bot.command('/start', (ctx) => ctx.reply(ctx.from.first_name));
 // 3. Start the bot
 bot.start()
