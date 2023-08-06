@@ -34,9 +34,10 @@ class Songs {
     //     return links;
     // }
 }
-
-
 const songs = new Songs();
+
+
+
 // 1. Create a bot
 const bot = new Bot(process.env.TG_TOKEN as string)
 
@@ -59,11 +60,12 @@ bot.callbackQuery("click-button-search", async (ctx) => {
 
     await bot.api.sendMessage(id, "Вот список песен:");
 
-    const list = songs.getListNamesSongs();
-    console.log(list);
+    const listOfSongs = songs.getListNamesSongs();
+
+    const countSongs: number = listOfSongs.length;
     let text: string = "";
-    for(let i =0; i < list.length; i++){
-        text+= (list[i]+"\n");
+    for(let i =0; i < countSongs; i++){
+        text+= (i + ". " + listOfSongs[i]+"\n");
     }
     console.log(text);
     await bot.api.sendMessage(id, text);
