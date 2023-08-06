@@ -66,6 +66,8 @@ bot.callbackQuery("click-button-search", async (ctx) => {
         .map((label) => [Keyboard.text(label)]);
     const keyboard = Keyboard.from(buttonRows).resized();
 
+    keyboard.one_time_keyboard = true;
+
     await bot.api.sendMessage(id, "Нажми на кнопку - получишь результат", {reply_markup: keyboard});
 });
 
