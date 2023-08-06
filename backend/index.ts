@@ -1,4 +1,5 @@
 import { Bot } from 'grammy'
+import {text} from "express";
 //import {json} from "express";
 
 // 1. Create a bot
@@ -7,7 +8,10 @@ const bot = new Bot(process.env.TG_TOKEN as string)
 // 2. Reply to text messages with the received text
 //bot.on('message:text', ctx => ctx.reply(ctx.message.text))
 bot.command("start", async(ctx) => {
-    await ctx.reply("Started bot");
+    const text_message = "Привет," + ctx.from.first_name + "!";
+    const id = ctx.chat.id;
+    await bot.api.sendMessage(id, text_message);
+    await ctx.reply("Привет еще раз!");
 });
 
 bot.on("message", async (ctx) => {
