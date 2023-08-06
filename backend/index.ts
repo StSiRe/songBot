@@ -14,6 +14,7 @@ class Songs {
         {
             names.push(this.list[i][0]);
         }
+        console.log(names);
         return names;
     }
 
@@ -57,6 +58,7 @@ bot.callbackQuery("click-button-search", async (ctx) => {
     const id = ctx.chat.id;
 
     await bot.api.sendMessage(id, "Вот список песен:");
+
     const list = songs.getListNamesSongs();
     console.log(list);
     let text: string;
@@ -64,7 +66,7 @@ bot.callbackQuery("click-button-search", async (ctx) => {
         text+= (list[i]+"\n");
     }
     console.log(text);
-    await bot.api.sendMessage(id, text);
+    //await bot.api.sendMessage(id, text);
 
     await bot.api.sendMessage(id, "Можешь пролистывать его при помощи кнопок снизу");
 });
