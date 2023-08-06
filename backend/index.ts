@@ -2,6 +2,10 @@ import {Bot, InlineKeyboard, Keyboard} from 'grammy'
 //import {text} from "express";
 //import {json} from "express";
 
+let userAddingID: number[];
+let userAddingStage: number;//0-nothing 1- has name 2-has text 3- has video link
+let userAddingSongData: string[];
+
 class Songs {
     private list = [
         ["Мы никогда не умрем!", "dfsdf \n dsdsfd", "you.tu/fdsfdsf"],
@@ -21,6 +25,11 @@ class Songs {
     getTextOfSong(name: string) {
         let texts: string = this.list[0][1];
         return texts;
+    }
+
+    appendSong(name: string, text:string, link:string)
+    {
+        this.list.push([name, text, link]);
     }
     //
     // getVideoLinkOfSong(id: number) {
@@ -74,50 +83,60 @@ bot.callbackQuery("click-button-search", async (ctx) => {
 
 bot.command("add", async(ctx) => {
     const id = ctx.chat.id;
-    const text_hello = "Привет, " + ctx.from.first_name + "!";
-    const text_description = "Ого, ты хочешь добавить песню? Что ж, давай я тебе в этом помогу)";
-    const labelDataPairs = [
-        ["« 1", "first"],
-        ["‹ 3", "prev"],
-        ["· 4 ·", "stay"],
-        ["5 ›", "next"],
-        ["31 »", "last"],
-    ];
-    const buttonRow = labelDataPairs
-        .map(([label, data]) => InlineKeyboard.text(label, data));
-    const keyboard = InlineKeyboard.from([buttonRow]);
-    await bot.api.sendMessage(id, text_hello);
-    await bot.api.sendMessage(id, text_description);
-
-    await bot.api.sendMessage(id, "Подскажи, будет ли к песне", {reply_markup: keyboard});
+    userAddingID.push(id);
 });
 bot.on("message", async (ctx) => {
 
     const id = ctx.chat.id;
-
-    const listOfSongs = songs.getListNamesSongs();
-
-    if(listOfSongs.includes(ctx.message.text))
+    if(userAddingID.includes(id))
     {
-        const keys: string[] = [ "Назад" ];
-
-        const buttonRows = keys
-            .map((label) => [Keyboard.text(label)]);
-        const keyboard = Keyboard.from(buttonRows).resized();
-
-        keyboard.one_time_keyboard = true;
-
-        const songText = songs.getTextOfSong(ctx.message.text);
-
-        await bot.api.sendMessage(id, songText, {reply_markup: keyboard});
-    }
-    else if(ctx.message.text == "Назад")
-    {
-        await showSongsList(id);
+        //Если человек записывает песню - то дело другое, тут надо запонминать
+        if(userAddingStage == 0)
+        {
+            await ctx.reply("Введите название песни:");
+            userAddingStage++;
+        }
+        else if(userAddingStage == 1)
+        {
+            userAddingSongData[0] = ctx.message.text;
+            await ctx.reply("Введите текст песни:");
+            userAddingStage++;
+        }
+        else if(userAddingStage == 2)
+        {
+            userAddingSongData[1] = ctx.message.text;
+            userAddingStage = 0;
+            userAddingID[userAddingID.indexOf(id)] = -1;
+            songs.appendSong(userAddingSongData[0], userAddingSongData[1], "nullptr");
+            await ctx.reply("Спасибо, ваша песня записана в базу!");
+        }
     }
     else
     {
-        await bot.api.sendMessage(id, "Такой песни я пока не знаю(\nОбратитесь к @andy_god - он поможет");
+        const listOfSongs = songs.getListNamesSongs();
+
+        if(listOfSongs.includes(ctx.message.text))
+        {
+            const keys: string[] = [ "Назад" ];
+
+            const buttonRows = keys
+                .map((label) => [Keyboard.text(label)]);
+            const keyboard = Keyboard.from(buttonRows).resized();
+
+            keyboard.one_time_keyboard = true;
+
+            const songText = songs.getTextOfSong(ctx.message.text);
+
+            await bot.api.sendMessage(id, songText, {reply_markup: keyboard});
+        }
+        else if(ctx.message.text == "Назад")
+        {
+            await showSongsList(id);
+        }
+        else
+        {
+            await bot.api.sendMessage(id, "Такой песни я пока не знаю(\nОбратитесь к @andy_god - он поможет");
+        }
     }
 });
 
