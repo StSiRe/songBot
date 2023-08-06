@@ -10,6 +10,7 @@ class Songs {
     ];
     getListNamesSongs() {
         let names: string[];
+        console.log(this.list);
         for (let item in this.list) {
             names.push(item);
         }
@@ -57,6 +58,7 @@ bot.callbackQuery("click-button-search", async (ctx) => {
 
     await bot.api.sendMessage(id, "Вот список песен:");
     const list = songs.getListNamesSongs();
+    console.log(list);
     let text: string;
     for(let item in list)
     {
