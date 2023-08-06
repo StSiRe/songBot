@@ -12,11 +12,17 @@ bot.command("start", async(ctx) => {
     const text_hello = "Привет, " + ctx.from.first_name + "!";
     const text_description = "Меня зовут songBot и я знаю тексты и танцы любимых ЯвДельских песен";
 
-    const inlineKeyboard = new InlineKeyboard().text("click", "click-payload");
+    const inlineKeyboard = new InlineKeyboard().text("Погнали", "click-button-search");
 
     await bot.api.sendMessage(id, text_hello);
     await bot.api.sendMessage(id, text_description);
     await bot.api.sendMessage(id,"Погнали петь?", {reply_markup: inlineKeyboard});
+});
+
+bot.callbackQuery("click-button-search", async (ctx) => {
+    await ctx.answerCallbackQuery({
+        text: "You were curious, indeed!",
+    });
 });
 
 
