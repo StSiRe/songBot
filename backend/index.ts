@@ -23,7 +23,14 @@ class Songs {
     }
 
     getTextOfSong(name: string) {
-        let texts: string = this.list[0][1];
+        let texts: string = "";
+        for(let i=0; i < this.list.length; i++)
+        {
+            if(this.list[i][0] == name)
+            {
+                texts = this.list[i][1];
+            }
+        }
         return texts;
     }
 
