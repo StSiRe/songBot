@@ -1,4 +1,4 @@
-import {Bot, InlineKeyboard} from 'grammy'
+import {Bot, InlineKeyboard, Keyboard} from 'grammy'
 //import {text} from "express";
 //import {json} from "express";
 
@@ -66,11 +66,16 @@ bot.callbackQuery("click-button-search", async (ctx) => {
     let text: string = "";
     for(let i =0; i < countSongs; i++){
         text+= (i + ". " + listOfSongs[i]+"\n");
-        const inlineKeyboard = new InlineKeyboard().text(listOfSongs[i], "click-button-song-selection");
-
-        await bot.api.sendMessage(id, "s", {reply_markup: inlineKeyboard});
     }
-
+    const labels = [
+        "Yes, they certainly are",
+        "I'm not quite sure",
+        "No. 😈",
+    ];
+    const buttonRows = labels
+        .map((label) => [Keyboard.text(label)]);
+    const keyboard = Keyboard.from(buttonRows).resized();
+    await bot.api.sendMessage(id, "s", {reply_markup: keyboard});
     await bot.api.sendMessage(id, "Можешь пролистывать его при помощи кнопок снизу");
 });
 
