@@ -15,6 +15,7 @@ bot.on("message", async (ctx) => {
     await ctx.reply(txt);
 });
 
+
 //bot.command('/start', (ctx) => ctx.reply(ctx.from.first_name));
 // 3. Start the bot
 bot.start()
