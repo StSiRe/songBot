@@ -71,6 +71,12 @@ bot.callbackQuery("click-button-search", async (ctx) => {
         "Yes, they certainly are",
         "I'm not quite sure",
         "No. 😈",
+        "Yes, they certainly are",
+        "I'm not quite sure",
+        "No. 😈",
+        "Yes, they certainly are",
+        "I'm not quite sure",
+        "No. 😈",
     ];
     const buttonRows = labels
         .map((label) => [Keyboard.text(label)]);
