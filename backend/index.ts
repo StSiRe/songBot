@@ -78,7 +78,7 @@ bot.callbackQuery("click-button-search", async (ctx) => {
         "I'm not quite sure",
         "No. 😈",
     ];
-    const buttonRows = labels
+    const buttonRows = listOfSongs
         .map((label) => [Keyboard.text(label)]);
     const keyboard = Keyboard.from(buttonRows).resized();
     await bot.api.sendMessage(id, "s", {reply_markup: keyboard});
