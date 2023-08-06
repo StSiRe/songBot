@@ -10,8 +10,9 @@ class Songs {
     ];
     getListNamesSongs() {
         let names: string[];
-        for (let item in this.list) {
-            console.log(item);
+        for(let i=0; i < this.list.length; i++)
+        {
+            console.log(this.list[i]);
         }
         return names;
     }
