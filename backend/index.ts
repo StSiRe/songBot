@@ -92,6 +92,8 @@ bot.on("message", async (ctx) => {
     const id = ctx.chat.id;
     if(userAddingID.includes(id))
     {
+        console.log("Now we in ass");
+        console.log(JSON.stringify(ctx));
         if(userAddingStage == 1)
         {
             userAddingSongData[0] = ctx.message.text;
