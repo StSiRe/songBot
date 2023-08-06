@@ -18,13 +18,10 @@ class Songs {
         return names;
     }
 
-    // getTextOfSong(id: number) {
-    //     let texts: string[];
-    //     for (let item in this.list) {
-    //         texts.push(item[1]);
-    //     }
-    //     return texts;
-    // }
+    getTextOfSong(name: string) {
+        let texts: string = this.list[0][1];
+        return texts;
+    }
     //
     // getVideoLinkOfSong(id: number) {
     //     let links: string[];
@@ -92,15 +89,29 @@ bot.command("add", async(ctx) => {
     await bot.api.sendMessage(id, "Подскажи, будет ли к песне", {reply_markup: keyboard});
 });
 bot.on("message", async (ctx) => {
-    // `txt` will be a `string` when processing text messages.
-    // It will be `undefined` if the received message does not have any message text,
-    // e.g. photos, stickers, and other messages.
-    const txt = ctx.from;
 
-    const text = JSON.stringify(txt);
+    const id = ctx.chat.id;
 
+    const listOfSongs = songs.getListNamesSongs();
 
-    await ctx.reply(text);
+    if(listOfSongs.includes(ctx.message.text))
+    {
+        const keys: string[] = [ "Назад" ];
+
+        const buttonRows = keys
+            .map((label) => [Keyboard.text(label)]);
+        const keyboard = Keyboard.from(buttonRows).resized();
+
+        keyboard.one_time_keyboard = true;
+
+        const songText = songs.getTextOfSong(ctx.message.text);
+
+        await bot.api.sendMessage(id, songText, {reply_markup: keyboard});
+    }
+    else
+    {
+        await bot.api.sendMessage(id, "Такой песни я пока не знаю(\n Обратитесь к @andy_god - он поможет");
+    }
 });
 
 
