@@ -83,20 +83,16 @@ bot.callbackQuery("click-button-search", async (ctx) => {
 
 bot.command("add", async(ctx) => {
     const id = ctx.chat.id;
+    userAddingStage++;
     userAddingID.push(id);
+    await ctx.reply("Введите название песни:");
 });
 bot.on("message", async (ctx) => {
 
     const id = ctx.chat.id;
     if(userAddingID.includes(id))
     {
-        //Если человек записывает песню - то дело другое, тут надо запонминать
-        if(userAddingStage == 0)
-        {
-            await ctx.reply("Введите название песни:");
-            userAddingStage++;
-        }
-        else if(userAddingStage == 1)
+        if(userAddingStage == 1)
         {
             userAddingSongData[0] = ctx.message.text;
             await ctx.reply("Введите текст песни:");
