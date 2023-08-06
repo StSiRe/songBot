@@ -16,12 +16,17 @@ services:
   db:
     image: mysql:8.1
     restart: always
+    ports:
+      - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: db
+      MYSQL_USER: songbot
+      MYSQL_PASSWORD: password
     volumes:
       - /songbot/mysql:/var/lib/mysql
-    ports:
-      - '127.0.0.1:3306:3306'
+    #ports:
+    #  - '127.0.0.1:3306:3306'
 
   adminer:
     image: adminer

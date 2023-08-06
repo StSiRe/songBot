@@ -44,7 +44,7 @@ bot.command("add", async(ctx) => {
     await bot.api.sendMessage(id, text_hello);
     await bot.api.sendMessage(id, text_description);
 
-    await bot.api.sendMessage(id, "aaaa", {reply_markup: keyboard});
+    await bot.api.sendMessage(id, "Подскажи, будет ли к песне", {reply_markup: keyboard});
 });
 bot.on("message", async (ctx) => {
     // `txt` will be a `string` when processing text messages.
