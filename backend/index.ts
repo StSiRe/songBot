@@ -60,7 +60,7 @@ bot.callbackQuery("click-button-search", async (ctx) => {
 
     const listOfSongs = songs.getListNamesSongs();
 
-    const countSongs: number = listOfSongs.length;
+    listOfSongs.push("Назад");
 
     const buttonRows = listOfSongs
         .map((label) => [Keyboard.text(label)]);
