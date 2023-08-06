@@ -3,7 +3,7 @@ import {Bot, InlineKeyboard, Keyboard} from 'grammy'
 //import {json} from "express";
 
 let userAddingID: number[];
-let userAddingStage: number;//0-nothing 1- has name 2-has text 3- has video link
+let userAddingStage: number = 0;//0-nothing 1- has name 2-has text 3- has video link
 let userAddingSongData: string[];
 
 class Songs {
