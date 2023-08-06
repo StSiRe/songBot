@@ -142,7 +142,9 @@ bot.on("message", async (ctx) => {
 
             keyboard.one_time_keyboard = true;
 
-            const songText = songs.getTextOfSong(ctx.message.text);
+            let songText = "Текст песни " + ctx.message.text + ":\n";
+
+            songText += songs.getTextOfSong(ctx.message.text);
 
             await bot.api.sendMessage(id, songText, {reply_markup: keyboard});
         }
