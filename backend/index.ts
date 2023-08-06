@@ -66,9 +66,10 @@ bot.callbackQuery("click-button-search", async (ctx) => {
     let text: string = "";
     for(let i =0; i < countSongs; i++){
         text+= (i + ". " + listOfSongs[i]+"\n");
+        const inlineKeyboard = new InlineKeyboard().text(listOfSongs[i], "click-button-song-selection");
+
+        await bot.api.sendMessage(id, "", {reply_markup: inlineKeyboard});
     }
-    console.log(text);
-    await bot.api.sendMessage(id, text);
 
     await bot.api.sendMessage(id, "Можешь пролистывать его при помощи кнопок снизу");
 });
