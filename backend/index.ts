@@ -9,7 +9,7 @@ class Songs {
         ["Слава Андрею!", "Андрею \n слава", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
     ];
     getListNamesSongs() {
-        let names: string[] = ["AAAA", "BBBB", "CCCC"];
+        let names: string[] = ["Мы никогда не умрем", "Пуля дура", "Заставлял"];
         // for(let i=0; i < this.list.length - 1; i++)
         // {
         //     names.push(this.list[i][0]);
@@ -58,31 +58,15 @@ bot.command("start", async(ctx) => {
 bot.callbackQuery("click-button-search", async (ctx) => {
     const id = ctx.chat.id;
 
-    await bot.api.sendMessage(id, "Вот список песен:");
-
     const listOfSongs = songs.getListNamesSongs();
 
     const countSongs: number = listOfSongs.length;
-    let text: string = "";
-    for(let i =0; i < countSongs; i++){
-        text+= (i + ". " + listOfSongs[i]+"\n");
-    }
-    const labels = [
-        "Yes, they certainly are",
-        "I'm not quite sure",
-        "No. 😈",
-        "Yes, they certainly are",
-        "I'm not quite sure",
-        "No. 😈",
-        "Yes, they certainly are",
-        "I'm not quite sure",
-        "No. 😈",
-    ];
+
     const buttonRows = listOfSongs
         .map((label) => [Keyboard.text(label)]);
     const keyboard = Keyboard.from(buttonRows).resized();
-    await bot.api.sendMessage(id, "s", {reply_markup: keyboard});
-    await bot.api.sendMessage(id, "Можешь пролистывать его при помощи кнопок снизу");
+
+    await bot.api.sendMessage(id, "Нажми на кнопку - получишь результат", {reply_markup: keyboard});
 });
 
 
