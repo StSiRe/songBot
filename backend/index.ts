@@ -1,7 +1,10 @@
 import {Bot, InlineKeyboard} from 'grammy'
+
 //import {text} from "express";
 //import {json} from "express";
 
+
+const songs = new Songs();
 // 1. Create a bot
 const bot = new Bot(process.env.TG_TOKEN as string)
 
@@ -23,6 +26,15 @@ bot.callbackQuery("click-button-search", async (ctx) => {
     const id = ctx.chat.id;
 
     await bot.api.sendMessage(id, "Вот список песен:");
+    const list = songs.getListNamesSongs();
+    let text: string;
+    for(let item of list)
+    {
+        text+= (item+"\n");
+    }
+
+    await bot.api.sendMessage(id, text);
+
     await bot.api.sendMessage(id, "Можешь пролистывать его при помощи кнопок снизу");
 });
 
