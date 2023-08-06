@@ -60,7 +60,7 @@ bot.callbackQuery("click-button-search", async (ctx) => {
     const list = songs.getListNamesSongs();
     console.log(list);
     let text: string;
-    for(let i =0; i < list.length; i++){
+    for(let i =0; i < list.length - 1; i++){
         text+= (list[i]+"\n");
     }
     console.log(text);
