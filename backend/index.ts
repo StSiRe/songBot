@@ -11,8 +11,11 @@ class Songs {
     getListNamesSongs() {
         let names: string[];
         console.log(this.list);
+
+
+
         for (let item in this.list) {
-            names.push(item);
+            names.push(item[0]);
         }
         return names;
     }
