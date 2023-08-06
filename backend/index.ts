@@ -13,11 +13,11 @@ class Songs {
         ["Слава Андрею!", "Андрею \n слава", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
     ];
     getListNamesSongs() {
-        let names: string[] = ["Мы никогда не умрем", "Пуля дура", "Заставлял"];
-        // for(let i=0; i < this.list.length - 1; i++)
-        // {
-        //     names.push(this.list[i][0]);
-        // }
+        let names: string[] = [];
+        for(let i=0; i < this.list.length; i++)
+        {
+            names.push(this.list[i][0]);
+        }
         console.log(names);
         return names;
     }
@@ -32,14 +32,6 @@ class Songs {
         this.list.push([name, text, link]);
         console.log(this.list);
     }
-    //
-    // getVideoLinkOfSong(id: number) {
-    //     let links: string[];
-    //     for (let item in this.list) {
-    //         links.push(item[2]);
-    //     }
-    //     return links;
-    // }
 }
 const songs = new Songs();
 
@@ -105,8 +97,6 @@ bot.on("message", async (ctx) => {
     const id = ctx.chat.id;
     if(contains(userAddingID, id))
     {
-        console.log("Now we in ass");
-        console.log(JSON.stringify(ctx));
         if(userAddingStage == 1)
         {
             userAddingSongData[0] = ctx.message.text;
@@ -160,7 +150,5 @@ bot.on("message", async (ctx) => {
     }
 });
 
-
-//bot.command('/start', (ctx) => ctx.reply(ctx.from.first_name));
 // 3. Start the bot
 bot.start()
