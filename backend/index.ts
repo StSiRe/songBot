@@ -8,10 +8,14 @@ const bot = new Bot(process.env.TG_TOKEN as string)
 // 2. Reply to text messages with the received text
 //bot.on('message:text', ctx => ctx.reply(ctx.message.text))
 bot.command("start", async(ctx) => {
-    const text_message = "Привет," + ctx.from.first_name + "!";
     const id = ctx.chat.id;
-    await bot.api.sendMessage(id, text_message);
-    await ctx.reply("Привет еще раз!");
+    const text_hello = "Привет, " + ctx.from.first_name + "!";
+    const text_description = "Меня зовут songBot и я умею показывать тексты любимых ЯвДельских песен";
+    const text_actions_description = "Нажми /search для поиска среди моей библиотеки)";
+
+    await bot.api.sendMessage(id, text_hello);
+    await bot.api.sendMessage(id, text_description);
+    await bot.api.sendMessage(id, text_actions_description);
 });
 
 bot.on("message", async (ctx) => {
