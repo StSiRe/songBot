@@ -6,6 +6,9 @@ const bot = new Bot(process.env.TG_TOKEN as string)
 
 // 2. Reply to text messages with the received text
 //bot.on('message:text', ctx => ctx.reply(ctx.message.text))
+bot.command("start", async(ctx) => {
+    await ctx.reply("Started bot");
+});
 
 bot.on("message", async (ctx) => {
     // `txt` will be a `string` when processing text messages.
