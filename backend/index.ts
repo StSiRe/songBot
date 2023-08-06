@@ -51,10 +51,8 @@ bot.command("start", async(ctx) => {
     await bot.api.sendMessage(id, text_description);
     await bot.api.sendMessage(id,"Погнали петь?", {reply_markup: inlineKeyboard});
 });
-
-bot.callbackQuery("click-button-search", async (ctx) => {
-    const id = ctx.chat.id;
-
+async function showSongsList(id: number)
+{
     const listOfSongs = songs.getListNamesSongs();
 
     listOfSongs.push("Назад");
@@ -66,6 +64,11 @@ bot.callbackQuery("click-button-search", async (ctx) => {
     keyboard.one_time_keyboard = true;
 
     await bot.api.sendMessage(id, "Нажми на кнопку - получишь результат", {reply_markup: keyboard});
+}
+
+bot.callbackQuery("click-button-search", async (ctx) => {
+    const id = ctx.chat.id;
+    await showSongsList(id);
 });
 
 
@@ -108,9 +111,13 @@ bot.on("message", async (ctx) => {
 
         await bot.api.sendMessage(id, songText, {reply_markup: keyboard});
     }
+    else if(ctx.message.text == "Назад")
+    {
+        await showSongsList(id);
+    }
     else
     {
-        await bot.api.sendMessage(id, "Такой песни я пока не знаю(\n Обратитесь к @andy_god - он поможет");
+        await bot.api.sendMessage(id, "Такой песни я пока не знаю(\nОбратитесь к @andy_god - он поможет");
     }
 });
 
