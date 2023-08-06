@@ -10,15 +10,15 @@ class Songs {
     ];
     getListNamesSongs() {
         let names: string[];
-        for (let item of this.list) {
-            names.push(item[0]);
+        for (let item in this.list) {
+            names.push(item);
         }
         return names;
     }
 
     getTextOfSong(id: number) {
         let texts: string[];
-        for (let item of this.list) {
+        for (let item in this.list) {
             texts.push(item[1]);
         }
         return texts;
@@ -26,7 +26,7 @@ class Songs {
 
     getVideoLinkOfSong(id: number) {
         let links: string[];
-        for (let item of this.list) {
+        for (let item in this.list) {
             links.push(item[2]);
         }
         return links;
