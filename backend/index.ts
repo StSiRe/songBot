@@ -7,11 +7,7 @@ let userAddingStage: number = 0;//0-nothing 1- has name 2-has text 3- has video 
 let userAddingSongData: string[] = [ "", "", ""];
 
 class Songs {
-    private list = [
-        ["Мы никогда не умрем!", "dfsdf \n dsdsfd", "you.tu/fdsfdsf"],
-        ["Мы умрем!", "dffdsfsdf \n aaaaa", "you.tu/aaaaa"],
-        ["Слава Андрею!", "Андрею \n слава", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"]
-    ];
+    private list:string[][] =[];
     getListNamesSongs() {
         let names: string[] = [];
         for(let i=0; i < this.list.length; i++)
@@ -142,7 +138,7 @@ bot.on("message", async (ctx) => {
 
             keyboard.one_time_keyboard = true;
 
-            let songText = "Текст песни " + ctx.message.text + ":\n";
+            let songText = "Текст песни " + ctx.message.text + ":\n\n";
 
             songText += songs.getTextOfSong(ctx.message.text);
 
