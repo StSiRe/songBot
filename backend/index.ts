@@ -20,21 +20,31 @@ bot.command("start", async(ctx) => {
 });
 
 bot.callbackQuery("click-button-search", async (ctx) => {
-    await ctx.answerCallbackQuery({
-        text: "You were curious, indeed!",
-    });
+    const id = ctx.chat.id;
+
+    await bot.api.sendMessage(id, "Вот список песен:");
+    await bot.api.sendMessage(id, "Можешь пролистывать его при помощи кнопок снизу");
 });
 
 
-bot.command("search", async(ctx) => {
+bot.command("add", async(ctx) => {
     const id = ctx.chat.id;
     const text_hello = "Привет, " + ctx.from.first_name + "!";
-    const text_description = "Меня зовут songBot и я знаю тексты и танцы любимых ЯвДельских песен";
-    const text_actions_description = "Нажми /search для поиска среди моей библиотеки)";
-
+    const text_description = "Ого, ты хочешь добавить песню? Что ж, давай я тебе в этом помогу)";
+    const labelDataPairs = [
+        ["« 1", "first"],
+        ["‹ 3", "prev"],
+        ["· 4 ·", "stay"],
+        ["5 ›", "next"],
+        ["31 »", "last"],
+    ];
+    const buttonRow = labelDataPairs
+        .map(([label, data]) => InlineKeyboard.text(label, data));
+    const keyboard = InlineKeyboard.from([buttonRow]);
     await bot.api.sendMessage(id, text_hello);
     await bot.api.sendMessage(id, text_description);
-    await bot.api.sendMessage(id, text_actions_description);
+
+    await bot.api.sendMessage(id, "aaaa", {reply_markup: keyboard});
 });
 bot.on("message", async (ctx) => {
     // `txt` will be a `string` when processing text messages.
