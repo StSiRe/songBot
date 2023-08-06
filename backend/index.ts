@@ -30,6 +30,7 @@ class Songs {
     appendSong(name: string, text:string, link:string)
     {
         this.list.push([name, text, link]);
+        console.log(this.list);
     }
     //
     // getVideoLinkOfSong(id: number) {
@@ -118,7 +119,16 @@ bot.on("message", async (ctx) => {
             userAddingStage = 0;
             userAddingID[userAddingID.indexOf(id)] = -1;
             songs.appendSong(userAddingSongData[0], userAddingSongData[1], "nullptr");
-            await ctx.reply("Спасибо, ваша песня записана в базу!");
+
+            const keys: string[] = [ "Назад" ];
+
+            const buttonRows = keys
+                .map((label) => [Keyboard.text(label)]);
+            const keyboard = Keyboard.from(buttonRows).resized();
+
+            keyboard.one_time_keyboard = true;
+
+            await ctx.reply("Спасибо, ваша песня записана в базу!", {reply_markup: keyboard});
         }
     }
     else
